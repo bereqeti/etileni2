@@ -1,0 +1,80 @@
+/* Satoshi — Indian Type Foundry / Fontshare, free for personal and commercial use.
+   Self hosted so the site carries no third party font request. Variable, 300 to 900. */
+@font-face {
+  font-family: "Satoshi";
+  src: url("/fonts/Satoshi-Variable.woff2") format("woff2-variations"),
+       url("/fonts/Satoshi-Variable.woff2") format("woff2");
+  font-weight: 300 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 178 43% 13%;
+    --card: 0 0% 100%;
+    --card-foreground: 178 43% 13%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 178 43% 13%;
+    --primary: 184 66% 34%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 180 24% 95%;
+    --secondary-foreground: 178 43% 13%;
+    --muted: 180 24% 95%;
+    --muted-foreground: 172 17% 39%;
+    --accent: 186 59% 53%;
+    --accent-foreground: 187 68% 9%;
+    --destructive: 11 62% 48%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 173 24% 89%;
+    --input: 173 24% 89%;
+    --ring: 186 59% 53%;
+    --radius: 0.75rem;
+
+    /* brand extras, outside the shadcn contract */
+    --brand-green: 88 52% 51%;
+    --deep-1: 194 51% 12%;
+    --deep-2: 188 63% 22%;
+  }
+
+  * { @apply border-border; }
+  body { @apply bg-background text-foreground font-sans antialiased; }
+}
+
+@layer components {
+  .grad-primary { background-image: linear-gradient(135deg, #8BDCE5 0%, #3EC4BE 100%); }
+  .grad-deep    { background-image: linear-gradient(150deg, #0B2B33 0%, #1F6F6D 100%); }
+  .grad-green   { background-image: linear-gradient(135deg, #8BDCE5 0%, #3EC4BE 100%); }
+  .grad-text {
+    background-image: linear-gradient(135deg, #8BDCE5 0%, #3EC4BE 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+}
+
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+
+/* iOS zooms the page when a font under 16px gets focus. Keep form text at 16px on phones. */
+@media (max-width: 640px) {
+  input, textarea, select { font-size: 16px !important; }
+}
+
+/* every tap target clears the 44px minimum */
+@media (pointer: coarse) {
+  a, button, [role="button"] { touch-action: manipulation; }
+}
+
+.rv { opacity: 0; transform: translateY(16px); transition: opacity .6s ease, transform .6s cubic-bezier(.2,.7,.3,1); }
+.rv.in { opacity: 1; transform: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .rv { opacity: 1; transform: none; transition: none; }
+  *, *::before, *::after { animation: none !important; transition-duration: .01ms !important; }
+}
